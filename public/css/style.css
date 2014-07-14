@@ -2,6 +2,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: url("http://3.bp.blogspot.com/-7lYblpuOUGw/UMRebOwA6KI/AAAAAAAAEXs/GEYoLhS-Dpc/s1600/London-city-photos-black-and-white-052.jpg");
+  background-size: cover;
 }
 #map_canvas {
   height: 100%;
@@ -10,12 +12,10 @@ body {
   position: fixed;
   background: rgba(255,255,255,0.95);
   border: 1px solid #aaa;
-  padding: 20px;
   z-index: 5;
 }
 #search-area {
-  right: 40px;
-  top: 40px;
+  left: 10%;
 }
 #listing {
   left: 40px;
@@ -39,4 +39,15 @@ button {
   font-size: 14px;
   padding: 10px 15px;
   outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#init {
+  width: 100%;
+  height: auto;
+  margin: auto auto;
+  text-align: center;
+  margin-top: 200px;
+  color: #fff;
+  font-weight: 600;
 }

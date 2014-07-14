@@ -26,6 +26,8 @@ define(function(require) {
 
     showMap: function(){
       mapView = new MapView;
+      $("#forkme").fadeToggle(600);
+      $("#init").fadeToggle(600);
       $("#map").append(mapView.render().el);
       $("#controls").html(controlsTpl);
     },
