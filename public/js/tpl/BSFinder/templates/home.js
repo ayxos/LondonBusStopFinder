@@ -4,7 +4,7 @@ attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow |
 var buf = [];
 with (locals || {}) {
 var interp;
-buf.push('<p> Welcome to initView</p><button type="button" data-action="api" class="btn btn-default">List</button>');
+buf.push('<p> Welcome to LondonBusStopFinder</p><button type="button" data-action="map" class="btn btn-default">Map</button><div id="controls"></div><div id="map"></div>');
 }
 return buf.join("");
 };

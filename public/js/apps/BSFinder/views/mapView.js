@@ -17,21 +17,11 @@ define(function(require) {
 
     _map: null,
 
-    events: {
-      'click #removeBtn':'remove'
-    },
-
     // init method, just shows the map
     render: function(){
 
-      this.template = layoutTpl;
-
-      $(this.el).html(this.template);
-
       var mapElement = this.$el.find('#map');
       console.log('map', mapElement);
-
-      // this.createMapElement(this.$el, this.el);
 
       this.createMapElement(this.$el, this.el);
 
@@ -55,6 +45,7 @@ define(function(require) {
     },
 
     remove: function(){
+      console.log('cleaning map..');
       for(var i=0;i<mark.length;i++){
         mark[i].setMap(null);
       }

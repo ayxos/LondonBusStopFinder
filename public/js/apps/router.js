@@ -2,14 +2,15 @@ define(function(require) {
   'use strict';
 
   var Backbone = require('backbone')
-  , MapView = require('js/apps/BSFinder/views/mapView')
+  // , MapView = require('js/apps/BSFinder/views/mapView')
+  , HomeView = require('js/apps/BSFinder/views/homeView')
 
   ;
 
   return Backbone.Router.extend({
 
     routes: {
-      '' : 'showMap'
+      '' : 'home'
     },
 
     initialize: function(){
@@ -17,9 +18,9 @@ define(function(require) {
       Backbone.history.start();
     },
 
-    showMap: function(){
-      var mapView = new MapView;
-      $("#backbone").append(mapView.render().el);
+    home: function(){
+      var homeView = new HomeView();
+      $("#backbone").append(homeView.render().el);
     }
   });
 

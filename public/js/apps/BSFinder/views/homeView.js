@@ -2,13 +2,20 @@ define(function(require) {
   'use strict';
 
   var Backbone = require('backbone')
+  // templates
   , homeTpl = require('js/tpl/BSFinder/templates/home')
+  , controlsTpl = require('js/tpl/BSFinder/templates/controls')
+  // views
+  , MapView = require('js/apps/BSFinder/views/mapView')
+
+  , mapView
   ;
 
   return Backbone.View.extend({
 
     events: {
-      'click [data-action="api"]': 'goToMap'
+      'click [data-action="map"]': 'showMap',
+      'click #removeBtn':'remove'
     },
 
     initialize:function (arg) {
@@ -17,8 +24,15 @@ define(function(require) {
       this.router = arg;
     },
 
-    goToApi: function() {
-      this.router.navigate("/map", true);
+    showMap: function(){
+      mapView = new MapView;
+      $("#map").append(mapView.render().el);
+      $("#controls").html(controlsTpl);
+    },
+
+    remove: function(){
+      console.log('click on remove');
+      mapView.remove();
     },
 
     render:function () {
