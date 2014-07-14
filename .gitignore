@@ -2,3 +2,4 @@
 /public/vendors
 /bower_components
 .DS*
+/public/css/*.css
