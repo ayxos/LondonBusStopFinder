@@ -31,7 +31,7 @@ define(function(require) {
     createMapElement: function($element, el ){
       var self = this;
       console.log('$element', $element, 'el', el);
-      $element.css({width: (window.innerWidth - 5) + 'px', height: (window.innerHeight - 5) + 'px'});
+      $element.css({margin: 'auto auto', 'margin-top': '20px', width: (window.innerWidth - 60) + 'px', height: (window.innerHeight - 60) + 'px'});
 
       this.map = new google.maps.Map(el,{
         zoom: 14,
