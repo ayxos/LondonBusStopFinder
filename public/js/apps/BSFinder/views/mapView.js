@@ -128,7 +128,7 @@ define(function(require) {
       console.log('info', info);
       var contentString = '<div id="content">'+
         '<h1 id="firstHeading" class="firstHeading">Stop nº: ' + mark.id + '</h1>' +
-        '<div id="bodyContent">'+ '<ul>';
+        '<div id="bodyContent">';
 
       contentString += this.createContent(info);
 
@@ -142,7 +142,7 @@ define(function(require) {
 
     // better if its moved to a external template like jade or handlebars
     createContent: function(info){
-      var result;
+      var result = '<ul> Bus stops List';
       for(var i=0;i<info.arrivals.length;i++){
         result += '<li>Bus: <a style="color:blue">' + info.arrivals[i].routeId + ' </a> Destination: <c style="color:grey"> ' +  info.arrivals[i].destination + '</c> left: <b>' + info.arrivals[i].estimatedWait + '</b></li>';
       }

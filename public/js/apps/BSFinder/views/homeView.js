@@ -15,8 +15,7 @@ define(function(require) {
 
     events: {
       'click [data-action="map"]': 'showMap',
-      'click #removeBtn':'remove',
-      'click #backBtn':'goBack'
+      'click #removeBtn':'remove'
     },
 
     initialize:function (arg) {
@@ -24,13 +23,6 @@ define(function(require) {
       this.template = homeTpl;
       this.router = arg;
       mapView = new MapView;
-    },
-
-    goBack: function(){
-      $("#controls").fadeToggle(600);
-      $("#map").fadeToggle(600);
-      $("#forkme").fadeToggle(600);
-      $("#init").fadeToggle(600);
     },
 
     showMap: function(){
