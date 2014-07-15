@@ -8,7 +8,8 @@ requirejs.config({
     jquery                       : 'vendors/jquery/jquery',
     underscore                   : 'vendors/underscore/underscore',
     backbone                     : 'vendors/backbone/backbone',
-    'async'                      : 'vendors/requirejs-plugins/async'
+    'async'                      : 'vendors/requirejs-plugins/async',
+    bootstrap_3                  : 'vendors/bootstrap-3/bootstrap'
   },
 
   shim: {
@@ -18,6 +19,9 @@ requirejs.config({
     backbone: {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
+    },
+    bootstrap_3: {
+      deps: ['jquery']
     }
   }
 });

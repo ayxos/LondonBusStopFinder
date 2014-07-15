@@ -8,7 +8,8 @@
     "jquery": "~2.0.3",
     "requirejs": "*",
     "underscore-amd": "*",
-    "requirejs-plugins": "~1.0.2"
+    "requirejs-plugins": "~1.0.2",
+    "bootstrap-3": "bootstrap#3"
   },
   "ignore": [
     "**/.*",
