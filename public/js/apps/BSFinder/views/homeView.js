@@ -15,13 +15,21 @@ define(function(require) {
 
     events: {
       'click [data-action="map"]': 'showMap',
-      'click #removeBtn':'remove'
+      'click #removeBtn':'remove',
+      'click #backBtn':'goBack'
     },
 
     initialize:function (arg) {
       console.log('homeview');
       this.template = homeTpl;
       this.router = arg;
+    },
+
+    goBack: function(){
+      $("#controls").fadeToggle(600);
+      $("#map").fadeToggle(600);
+      $("#forkme").fadeToggle(600);
+      $("#init").fadeToggle(600);
     },
 
     showMap: function(){

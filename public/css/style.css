@@ -53,3 +53,7 @@ button {
   color: #fff;
   font-weight: 600;
 }
+#init a {
+  display: block;
+  margin-top: 10%;
+}
