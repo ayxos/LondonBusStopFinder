@@ -9,7 +9,7 @@ define(function(require) {
   , _ = require('underscore')
   , Backbone = require('backbone')
   // notification view
-  , Notification = require('js/common/notifications/views/notificationBaseView') 
+  , Notification = require('js/common/notifications/views/notificationBaseView')
   , mark = []
   ;
 
@@ -40,15 +40,28 @@ define(function(require) {
       });
 
       // SHOW NOTIIFICATION
-      var not = new Notification({
-        // type could be: info/danger/success/warning
-        type: 'info',
-        msg: 'menu loaded'
-      });
+      setTimeout(function(){
+        new Notification({
+          // type could be: info/danger/success/warning
+          type: 'info',
+          msg: 'to load Bus stops just click'
+        });
+      },2000);
+
 
       google.maps.event.addListener(this.map, 'click', function(event) {
-        if (self.map.zoom < 7){
+        console.log('zoom',self.map.zoom);
+        self.remove();
+        if (self.map.zoom > 15){
           self.placeMarker(event.latLng, self.map);
+        }
+        else{
+          // SHOW NOTIIFICATION
+          new Notification({
+            // type could be: info/danger/success/warning
+            type: 'warning',
+            msg: 'you need more zoom!'
+          });
         }
       });
 

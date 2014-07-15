@@ -3,12 +3,12 @@ define(function(require) {
 
   require('bootstrap_3');
 
-  var Backbone_refactor = require('backbone') 
+  var Backbone_refactor = require('backbone')
   // templates
   , notificationBaseTpl = require('js/tpl/common/notifications/templates/alert-notification')
-    
+
   ;
-  
+
   return Backbone_refactor.View.extend({
 
     el: $("#loading"),
@@ -28,11 +28,12 @@ define(function(require) {
     },
 
     render: function() {
-      $(this.el).append( this.template(this.model) );
-      this.$el.find(".alert").alert();
+      console.log('asociando al div alert');
+      $('#alerts').append( this.template(this.model) );
+      $("#alerts").alert();
       return this.$el;
     }
 
   });
-  
+
 });

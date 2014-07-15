@@ -23,6 +23,7 @@ define(function(require) {
       console.log('homeview');
       this.template = homeTpl;
       this.router = arg;
+      mapView = new MapView;
     },
 
     goBack: function(){
@@ -33,7 +34,6 @@ define(function(require) {
     },
 
     showMap: function(){
-      mapView = new MapView;
       $("#forkme").fadeToggle(600);
       $("#init").fadeToggle(600);
       $("#map").append(mapView.render().el);
