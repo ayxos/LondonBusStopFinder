@@ -8,7 +8,8 @@ define(function(require) {
   var $ = require('jquery')
   , _ = require('underscore')
   , Backbone = require('backbone')
-  , layoutTpl = require('js/tpl/BSFinder/templates/layout')
+  // notification view
+  , Notification = require('js/common/notifications/views/notificationBaseView') 
   , mark = []
   ;
 
@@ -38,8 +39,17 @@ define(function(require) {
         center: new google.maps.LatLng(51.5286416,-0.1015987)
       });
 
+      // SHOW NOTIIFICATION
+      var not = new Notification({
+        // type could be: info/danger/success/warning
+        type: 'info',
+        msg: 'menu loaded'
+      });
+
       google.maps.event.addListener(this.map, 'click', function(event) {
-        self.placeMarker(event.latLng, self.map);
+        if (self.map.zoom < 7){
+          self.placeMarker(event.latLng, self.map);
+        }
       });
 
     },

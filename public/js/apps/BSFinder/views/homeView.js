@@ -3,8 +3,8 @@ define(function(require) {
 
   var Backbone = require('backbone')
   // templates
-  , homeTpl = require('js/tpl/BSFinder/templates/home')
-  , controlsTpl = require('js/tpl/BSFinder/templates/controls')
+  , homeTpl = require('js/tpl/apps/BSFinder/templates/home')
+  , controlsTpl = require('js/tpl/apps/BSFinder/templates/controls')
   // views
   , MapView = require('js/apps/BSFinder/views/mapView')
 

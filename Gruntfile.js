@@ -36,7 +36,7 @@ module.exports = function(grunt) {
           'public/js/tpl/': 'public/js/**/**/templates/**/*.jade'
         },
         options: {
-          basePath: 'public/js/apps/',
+          basePath: 'public/js/',
           wrap: {
             wrap: true,
             amd: true,
