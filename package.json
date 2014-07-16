@@ -15,7 +15,7 @@
     "stylus": "*",
     "mongoose": "*",
     "express": "^4.1.0",
-    "static-favicon": "^1.0.2",
+    "serve-favicon": "*",
     "morgan": "^1.0.0",
     "method-override": "^1.0.0",
     "json": "0.0.14",

@@ -9,7 +9,8 @@ requirejs.config({
     underscore                   : 'vendors/underscore/underscore',
     backbone                     : 'vendors/backbone/backbone',
     'async'                      : 'vendors/requirejs-plugins/async',
-    bootstrap_3                  : 'vendors/bootstrap-3/bootstrap'
+    bootstrap_3                  : 'vendors/bootstrap-3/bootstrap',
+    spin                         : 'vendors/spin/jquery.spin'
   },
 
   shim: {
@@ -21,6 +22,9 @@ requirejs.config({
       exports: 'Backbone'
     },
     bootstrap_3: {
+      deps: ['jquery']
+    },
+    spin: {
       deps: ['jquery']
     }
   }

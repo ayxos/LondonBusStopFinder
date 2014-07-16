@@ -9,7 +9,8 @@
     "requirejs": "*",
     "underscore-amd": "*",
     "requirejs-plugins": "~1.0.2",
-    "bootstrap-3": "bootstrap#3"
+    "bootstrap-3": "bootstrap#3",
+    "spin": "~1.1.6"
   },
   "ignore": [
     "**/.*",

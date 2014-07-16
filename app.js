@@ -1,19 +1,18 @@
 var express        = require('express')
   , methodOverride = require('method-override')
   , logger         = require('morgan')
-  , favicon        = require('static-favicon')
+  , favicon        = require('serve-favicon')
   , Jade           = require('jade')
   , bodyParser     = require('body-parser')
+  , http           = require('http')
+  , path           = require('path')
   , app            = express();
-
-var http = require('http');
-var path = require('path');
 
 
 app.set('port', process.env.PORT || 8001);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(favicon());
+app.use(favicon(path.join(__dirname, 'public/assets/bus.ico')));
 app.use(logger('dev'));
 app.use(bodyParser());
 app.use(methodOverride());

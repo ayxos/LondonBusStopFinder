@@ -4,6 +4,8 @@ define(function(require) {
   // implemented google maps API to backbone
   require('async!http://maps.google.com/maps/api/js?sensor=false');
 
+  require('spin');
+
   //local variables using main require config file
   var $ = require('jquery')
   , _ = require('underscore')
@@ -18,14 +20,15 @@ define(function(require) {
 
     _map: null,
 
+    initialize: function(){
+      console.log('init map...');
+    },
+
     // init method, just shows the map
     render: function(){
-
       var mapElement = this.$el.find('#map');
       console.log('map', mapElement);
-
       this.createMapElement(this.$el, this.el);
-
       return this;
     },
 
