@@ -85,8 +85,8 @@ define(function(require) {
     // it must be a collection
     getStops: function(location){
       var result
-      , northEast = location.xa.j + ',' + location.pa.j
-      , southWest = location.xa.k + ',' + location.pa.k
+      , northEast = location.Ea.j + ',' + location.va.j
+      , southWest = location.Ea.k + ',' + location.va.k
       , self = this;
       $.ajax({
         async: true,
