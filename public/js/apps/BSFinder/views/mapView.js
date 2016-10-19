@@ -2,7 +2,7 @@ define(function(require) {
   'use strict';
 
   // implemented google maps API to backbone
-  require('async!http://maps.google.com/maps/api/js?sensor=false');
+  require('async!http://maps.google.com/maps/api/js');
   require('spin');
 
   //local variables using main require config file
@@ -29,7 +29,7 @@ define(function(require) {
       $.ajax({
         async: true,
         type: "GET",
-        url: '/auth',
+        url: location.href + '/auth',
         dataType: "json",
         success : function(data) {
           AUTH = '?app_key=' + data.app_key + '&app_id=' + data.app_id;
