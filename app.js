@@ -6,7 +6,8 @@ var express        = require('express')
   , bodyParser     = require('body-parser')
   , http           = require('http')
   , path           = require('path')
-  , app            = express();
+  , app            = express()
+  , credentials    = require('./credentials');
 
 
 app.set('port', process.env.PORT || 8001);
@@ -24,8 +25,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Pagina de Inicio: http:localhost:PORT
 app.get('/', function (req, res){
   res.render( 'index', {
+    credentials: credentials,
     title : 'RestAPI Backbone with Mongoose and Node/Express'
   });
+});
+
+// Pagina de Inicio: http:localhost:PORT
+app.get('/auth/', function (req, res){
+  res.json(credentials);
 });
 
 // // API BackBone

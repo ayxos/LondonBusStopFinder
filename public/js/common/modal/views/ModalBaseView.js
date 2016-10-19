@@ -21,7 +21,6 @@ define(function(require) {
     initialize: function(modalContentTpl) {
       this.template = modalBaseTpl;
       this.modalContentTpl = modalContentTpl;
-      console.log('init modal base view');
       // _.bindAll(this);
       this.render();
     },

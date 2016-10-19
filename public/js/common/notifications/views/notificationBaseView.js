@@ -23,12 +23,10 @@ define(function(require) {
         message: arg.msg,
         alert_type: 'alert-' + arg.type
       }
-      console.log('init notification base view', this.model, 'args', arg);
       this.render();
     },
 
     render: function() {
-      console.log('asociando al div alert');
       $('#alerts').append( this.template(this.model) );
       $("#alerts").alert();
       return this.$el;

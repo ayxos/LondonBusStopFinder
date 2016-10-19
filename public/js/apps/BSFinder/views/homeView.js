@@ -19,7 +19,6 @@ define(function(require) {
     },
 
     initialize:function (arg) {
-      console.log('homeview');
       this.template = homeTpl;
       this.router = arg;
       mapView = new MapView;
@@ -33,7 +32,6 @@ define(function(require) {
     },
 
     remove: function(){
-      console.log('click on remove');
       mapView.remove();
     },
 

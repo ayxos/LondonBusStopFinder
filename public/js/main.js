@@ -9,7 +9,7 @@ requirejs.config({
     underscore                   : 'vendors/underscore/underscore',
     backbone                     : 'vendors/backbone/backbone',
     'async'                      : 'vendors/requirejs-plugins/async',
-    bootstrap_3                  : 'vendors/bootstrap-3/bootstrap',
+    bootstrap_3                  : 'vendors/bootstrap/bootstrap',
     spin                         : 'vendors/spin/jquery.spin'
   },
 

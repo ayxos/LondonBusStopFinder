@@ -17,8 +17,7 @@ define(function(require) {
       this.tagName = arg.tagName;
       this.className = arg.className;
       this.row = arg.row;
-
-      console.log('init trendTableView', arg);
+      
       this.collection.bind("reset", this.render, this);
       this.collection.bind('add', this.add, this);
     },

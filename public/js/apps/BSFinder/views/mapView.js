@@ -3,7 +3,6 @@ define(function(require) {
 
   // implemented google maps API to backbone
   require('async!http://maps.google.com/maps/api/js?sensor=false');
-
   require('spin');
 
   //local variables using main require config file
@@ -13,7 +12,9 @@ define(function(require) {
   // notification view
   , Notification = require('js/common/notifications/views/notificationBaseView')
   , mark = []
-  ;
+
+  , URL = 'https://api.tfl.gov.uk/StopPoint'
+  , AUTH;
 
 
   var Map = Backbone.View.extend({
@@ -21,20 +22,33 @@ define(function(require) {
     _map: null,
 
     initialize: function(){
-      console.log('init map...');
+      this.getCredentials();
+    },
+
+    getCredentials: function(){
+      $.ajax({
+        async: true,
+        type: "GET",
+        url: '/auth',
+        dataType: "json",
+        success : function(data) {
+          AUTH = '?app_key=' + data.app_key + '&app_id=' + data.app_id;
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          console.log("AUTH COLLECTION FAILED: " + errorThrown);
+        }
+      });
     },
 
     // init method, just shows the map
     render: function(){
       var mapElement = this.$el.find('#map');
-      console.log('map', mapElement);
       this.createMapElement(this.$el, this.el);
       return this;
     },
 
     createMapElement: function($element, el ){
       var self = this;
-      console.log('$element', $element, 'el', el);
       $element.css({margin: 'auto auto', 'margin-top': '20px', width: (window.innerWidth - 60) + 'px', height: (window.innerHeight - 60) + 'px'});
 
       this.map = new google.maps.Map(el,{
@@ -53,7 +67,6 @@ define(function(require) {
 
 
       google.maps.event.addListener(this.map, 'click', function(event) {
-        console.log('zoom',self.map.zoom);
         self.remove();
         if (self.map.zoom > 15){
           self.placeMarker(event.latLng, self.map);
@@ -71,7 +84,6 @@ define(function(require) {
     },
 
     remove: function(){
-      console.log('cleaning map..');
       for(var i=0;i<mark.length;i++){
         mark[i].setMap(null);
       }
@@ -85,17 +97,21 @@ define(function(require) {
     // it must be a collection
     getStops: function(location){
       var result
-      , northEast = location.Ea.j + ',' + location.va.j
-      , southWest = location.Ea.k + ',' + location.va.k
-      , self = this;
+      , self = this
+      , swLat = '&swLat=' + location.f.f
+      , swLon = '&swLon=' + location.b.b
+      , neLat = '&neLat=' + location.f.b
+      , neLon = '&neLon=' + location.b.f
+      , stopTypes = '&stopTypes=CarPickupSetDownArea,NaptanAirAccessArea,NaptanAirEntrance,NaptanAirportBuilding,NaptanBusCoachStation,NaptanBusWayPoint,NaptanCoachAccessArea,NaptanCoachBay,NaptanCoachEntrance,NaptanCoachServiceCoverage,NaptanCoachVariableBay,NaptanFerryAccessArea,NaptanFerryBerth,NaptanFerryEntrance,NaptanFerryPort,NaptanFlexibleZone,NaptanHailAndRideSection,NaptanLiftCableCarAccessArea,NaptanLiftCableCarEntrance,NaptanLiftCableCarStop,NaptanLiftCableCarStopArea,NaptanMarkedPoint,NaptanMetroAccessArea,NaptanMetroEntrance,NaptanMetroPlatform,NaptanMetroStation,NaptanOnstreetBusCoachStopCluster,NaptanOnstreetBusCoachStopPair,NaptanPrivateBusCoachTram,NaptanPublicBusCoachTram,NaptanRailAccessArea,NaptanRailEntrance,NaptanRailPlatform,NaptanRailStation,NaptanSharedTaxi,NaptanTaxiRank,NaptanUnmarkedPoint&useStopPointHierarchy=True&includeChildren=True&returnLines=True';
+
       $.ajax({
         async: true,
         type: "GET",
-        url: 'http://digitaslbi-id-test.herokuapp.com/bus-stops?northEast=' + northEast + '&southWest=' + southWest,
-        dataType: "jsonp",
+        url: URL + AUTH + swLat + swLon + neLat + neLon + stopTypes,
+        dataType: "json",
         success : function(data) {
           console.log('data',data);
-          result = data.markers;
+          result = data;
           self.showStops(result);
         },
         error: function(jqXHR, textStatus, errorThrown){
@@ -108,14 +124,18 @@ define(function(require) {
     showStops: function(stopList){
       var self = this;
       var image = 'assets/bus.png';
+
+      function noIdFound(el) {
+        return el.naptanId;
+      }
+
       for(var i=0; i<stopList.length; i++){
-        // console.log('fewqfewewqfew', stopList[i]);
-        var myLatlng = new google.maps.LatLng(stopList[i].lat,stopList[i].lng);
+        var myLatlng = new google.maps.LatLng(stopList[i].lat,stopList[i].lon);
         mark[i] = new google.maps.Marker({
           position: myLatlng,
           map: this.map,
           icon: image,
-          id: stopList[i].id
+          id: stopList[i].children.length ? stopList[i].children[0].naptanId : noIdFound(stopList[i])
         });
       }
       for(var i=0; i<mark.length;i++){
@@ -123,12 +143,10 @@ define(function(require) {
           self.getPopupInfo(this.id,this);
         });
       }
-      console.log('refinish mark');
     },
 
     // method to init popup info
     showPopupInfo: function(info, mark){
-      console.log('info', info);
       var contentString = '<div id="content">'+
         '<h1 id="firstHeading" class="firstHeading">Stop nº: ' + mark.id + '</h1>' +
         '<div id="bodyContent">';
@@ -144,12 +162,29 @@ define(function(require) {
     },
 
     // better if its moved to a external template like jade or handlebars
-    createContent: function(info){
-      var result = '<ul> Bus stops List';
-      for(var i=0;i<info.arrivals.length;i++){
-        result += '<li>Bus: <a style="color:blue">' + info.arrivals[i].routeId + ' </a> Destination: <c style="color:grey"> ' +  info.arrivals[i].destination + '</c> left: <b>' + info.arrivals[i].estimatedWait + '</b></li>';
+    createContent: function(info) {
+
+      function millisToMinutesAndSeconds(millis) {
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
       }
-      result+='</ul></div></div>';
+
+      var result;
+      if (!info || !info.length) {
+        result = 'No data';
+      } else {
+        result = '<ul> Bus stops List for: ' + info[0].stationName + '\nTowards: ' + info[0].towards;
+        var previousValue;
+        for (var i=0; i < info.length; i++) {
+          // sometimes API returns same data twice
+          var addValue = (previousValue) ? (JSON.stringify(previousValue) === JSON.stringify(info[i])) : true;
+          result += (addValue) ? '<li>BusLine: <a style="color:red">' + info[i].lineId + ' </a> Destination: <c style="color:blue"> ' +  info[i].destinationName + '</c> left: <b>' + millisToMinutesAndSeconds(info[i].timeToStation) + '</b></li>' : ''; 
+          previousValue = info[i];
+        }
+      }
+      
+      result += '</ul></div></div>';
 
       return result;
     },
@@ -161,8 +196,8 @@ define(function(require) {
       $.ajax({
         async: true,
         type: "GET",
-        url: 'http://digitaslbi-id-test.herokuapp.com/bus-stops/' + id,
-        dataType: "jsonp",
+        url: URL + '/' + id + '/arrivals',
+        dataType: "json",
         success : function(data) {
           self.showPopupInfo(data, mark);
         },

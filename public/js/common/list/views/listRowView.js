@@ -12,7 +12,6 @@ define(function(require) {
       this.model = arg.model;
       this.attributes = arg.attributes;
 
-      console.log('New item view', arg);
       this.model.bind("change", this.render, this);
       this.model.bind("destroy", this.close, this);
     },
