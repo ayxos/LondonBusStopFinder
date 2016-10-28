@@ -109,7 +109,7 @@ define(function(require) {
     // makers for every data entry
     showStops: function(stopList){
       var self = this;
-      var image = 'assets/bus.png';
+      var image = 'public/assets/bus.png';
 
       function noIdFound(el) {
         return el.naptanId;
