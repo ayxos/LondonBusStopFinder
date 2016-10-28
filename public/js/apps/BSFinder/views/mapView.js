@@ -2,7 +2,7 @@ define(function(require) {
   'use strict';
 
   // implemented google maps API to backbone
-  require('async!http://maps.google.com/maps/api/js');
+  require('async!https://maps.googleapis.com/maps/api/js?key=AIzaSyB9G5-iUtRIvBaVosUbocDq2sXJsQevbNk&callback=initMap');
   require('spin');
 
   var creds = {
