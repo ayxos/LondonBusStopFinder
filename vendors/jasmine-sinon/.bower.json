@@ -1,0 +1,14 @@
+{
+  "name": "jasmine-sinon",
+  "homepage": "https://github.com/froots/jasmine-sinon",
+  "version": "0.1.0",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "6b7e022cb1228941f3f03a61931e7355f2b58a2c"
+  },
+  "_source": "git://github.com/froots/jasmine-sinon.git",
+  "_target": "~0.1.0",
+  "_originalSource": "jasmine-sinon"
+}

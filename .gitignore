@@ -1,7 +1,0 @@
-/node_modules
-/public/vendors
-/bower_components
-.DS*
-/public/css/*.css
-/public/js/tpl
-credentials.js
