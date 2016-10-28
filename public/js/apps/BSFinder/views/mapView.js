@@ -5,6 +5,11 @@ define(function(require) {
   require('async!http://maps.google.com/maps/api/js');
   require('spin');
 
+  var creds = {
+    app_key: '6713500d5c3bb07919240b03e14a56fb',
+    app_id: "0ce4e903"
+  };
+
   //local variables using main require config file
   var $ = require('jquery')
   , _ = require('underscore')
@@ -14,31 +19,12 @@ define(function(require) {
   , mark = []
 
   , URL = 'https://api.tfl.gov.uk/StopPoint'
-  , AUTH;
+  , AUTH = '?app_key=' + creds.app_key + '&app_id=' + creds.app_id;
 
 
   var Map = Backbone.View.extend({
 
     _map: null,
-
-    initialize: function(){
-      this.getCredentials();
-    },
-
-    getCredentials: function(){
-      $.ajax({
-        async: true,
-        type: "GET",
-        url: location.href + '/auth',
-        dataType: "json",
-        success : function(data) {
-          AUTH = '?app_key=' + data.app_key + '&app_id=' + data.app_id;
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-          console.log("AUTH COLLECTION FAILED: " + errorThrown);
-        }
-      });
-    },
 
     // init method, just shows the map
     render: function(){
