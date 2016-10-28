@@ -1,7 +1,7 @@
 requirejs.config({
   waitSeconds: 0,
 
-  baseUrl: './',
+  baseUrl: './public/',
 
   paths: {
     jade                         : 'vendors/jade/runtime',
